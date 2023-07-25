@@ -5,36 +5,8 @@
 # License: MIT
 # https://github.com/tteck/Proxmox/raw/main/LICENSE
 
-source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
-color
-verb_ip6
-catch_errors
-setting_up_container
-network_check
-update_os
-
-msg_info "Installing Dependencies"
-$STD apt-get install -y curl
-$STD apt-get install -y sudo
-$STD apt-get install -y mc
-$STD apt-get install -y git
-msg_ok "Installed Dependencies"
-
-msg_info "Setting up Node.js Repository"
-$STD bash <(curl -fsSL https://deb.nodesource.com/setup_18.x)
-msg_ok "Set up Node.js Repository"
-
-msg_info "Installing Node.js"
-$STD apt-get install -y nodejs git make g++ gcc
-$STD npm install -g pnpm
-msg_ok "Installed Node.js"
-
-#!/usr/bin/env bash
-
-# Copyright (c) 2021-2023 tteck
-# Author: tteck (tteckster)
-# License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# Install Command.
+# bash -c "$(wget -qLO - https://raw.githubusercontent.com/garethcheyne/Proxmox/main/custom/node.sh)"
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -59,6 +31,21 @@ msg_info "Installing Node.js"
 $STD apt-get install -y nodejs git make g++ gcc
 $STD npm install -g pnpm
 msg_ok "Installed Node.js"
+latest
+
+msg_info "Installing Yarn"
+$STD bash <(curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -)
+$STD echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+$STD apt-get update && sudo apt-get install yarn
+msg_ok "Installed Yarn"
+
+msg_info "Installing Strapi.io"
+mkdir /opt/err403
+cd /opt/err403
+$STD yarn create strapi-app err403-strapi --quickstart --ts 
+msg_ok "Installed Strapi.io"
+
+
 
 # msg_info "Installing Homepage (Patience)"
 # cd /opt
