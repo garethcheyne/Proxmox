@@ -20,34 +20,31 @@ setting_up_container
 network_check
 update_os
 
-echo -en "${GN} Installing Dependencies"
-$STD apt-get install -y curl
-$STD apt-get install -y sudo
-$STD apt-get install -y git
+echo -en "${GN} Installing Basic Dependencies... "
+$STD apt-get update
+$STD apt-get upgrade -y
+$STD apt-get install -y curl sudo git
 echo -e "${CM}${CL} \r"
 
-echo -en "${GN} Setting up Node v18.x Repository"
+echo -en "${GN} Getting Node v18.x Repository... "
 curl -sSL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
 bash nodesource_setup.sh
-$STD apt-get update 
+$STD apt-get update
 echo -e "${CM}${CL} \r"
 
 
-echo -en "${GN} Installing Node v18.x"
-$STD apt-get install -y nodejs 
-$STD apt-get install -y make 
-$STD apt-get install -y g++ 
-$STD apt-get install -y gcc 
+echo -en "${GN} Installing Node v18.x... "
+$STD apt-get install -y nodejs make g++ gcc
 echo -e "${CM}${CL} \r"
 
-echo -en "${GN} Installing Yarn"
+echo -en "${GN} Installing Yarn... "
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list &>/dev/null
-$STD apt-get update 
+$STD apt-get update
 $STD apt-get install -y yarn
 echo -e "${CM}${CL} \r"
 
-install_webadmin() {
+install_webmin() {
     echo -en "${GN} Installing Prerequisites... "
     apt update &>/dev/null
     apt-get -y install libnet-ssleay-perl libauthen-pam-perl libio-pty-perl unzip shared-mime-info &>/dev/null
@@ -69,17 +66,33 @@ install_webadmin() {
     echo -e "Successfully Installed!! Webmin should be reachable by going to https://${IP}:10000"
 }
 
-clear
+while true; do
+    read -p "Do you want to install Webmin? (yes/no): " answer
 
-# Ask the user a yes/no question
-read -p "DDo you want to install Webmin? (yes/no): " answer
+    if [[ "$answer" == "yes" ]]; then
+        install_webmin
+        break
+    elif [[ "$answer" == "no" ]]; then
+        echo "Okay, the function will not be run."
+        break
+    else
+        echo "Please enter 'yes' or 'no'."
+    fi
+done
 
-# Check the answer and run the function if it's 'yes'
-if [[ "$answer" == "yes" ]]; then
-    install_webadmin
-else
-    echo "Okay,"
-fi
+while true; do
+    read -p "Do you want to pull a repo?: " answer
+
+    if [[ "$answer" == "yes" ]]; then
+        echo "Okay, we will do this later."
+        break
+    elif [[ "$answer" == "no" ]]; then
+        echo "Okay, Sad :("
+        break
+    else
+        echo "Please enter 'yes' or 'no'."
+    fi
+done
 
 
 
