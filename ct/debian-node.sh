@@ -21,7 +21,7 @@ EOF
 }
 header_info
 echo -e "Loading..."
-APP="DebianNode"
+APP="Debian Node Server"
 var_disk="4"
 var_cpu="1"
 var_ram="1024"
@@ -71,6 +71,13 @@ function update_script() {
     msg_ok "Updated ${APP} LXC"
     exit
 }
+
+msg_info "Installing Dependencies"
+apt-get install -y curl &>/dev/null
+apt-get install -y sudo &>/dev/null
+apt-get install -y git &>/dev/null
+msg_ok "Installed Dependencies"
+
 
 # msg_info "Installing Dependencies"
 # apt-get install -y curl &>/dev/null
