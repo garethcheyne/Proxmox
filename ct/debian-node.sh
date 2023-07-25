@@ -80,7 +80,8 @@ msg_ok "Installed Dependencies"
 
 
 msg_info "Setting up Node.js Repository"
-curl -fOL https://deb.nodesource.com/setup_18.x | sh &>/dev/null
+curl -sL https://deb.nodesource.com/setup_18.x curl -o nodesource_setup.sh &>/dev/null
+bash nodesource_setup.sh &>/dev/null
 msg_ok "Set up Node.js Repository"
 msg_ok node -v
 
