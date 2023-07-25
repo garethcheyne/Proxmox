@@ -5,6 +5,13 @@
 # License: MIT
 # https://github.com/tteck/Proxmox/raw/main/LICENSE
 
+YW=$(echo "\033[33m")
+RD=$(echo "\033[01;31m")
+BL=$(echo "\033[36m")
+CM='\xE2\x9C\x94\033'
+GN=$(echo "\033[1;92m")
+CL=$(echo "\033[m")
+
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
 verb_ip6
@@ -13,28 +20,32 @@ setting_up_container
 network_check
 update_os
 
-msg_info "Installing Dependencies"
+echo -en "${GN} Installing Dependencies"
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y git
-msg_ok "Installed Dependencies"
+echo -e "${CM}${CL} \r"
 
-msg_info "Setting up Node v18.x Repository"
+echo -en "${GN} Setting up Node v18.x Repository"
 curl -sSL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
 bash nodesource_setup.sh
 $STD apt-get update 
+echo -e "${CM}${CL} \r"
 
-msg_info "Installing Node v18.x"
+
+echo -en "${GN} Installing Node v18.x"
 $STD apt-get install -y nodejs 
 $STD apt-get install -y make 
 $STD apt-get install -y g++ 
 $STD apt-get install -y gcc 
+echo -e "${CM}${CL} \r"
 
-msg_info "Installing Yarn"
+echo -en "${GN} Installing Yarn"
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list &>/dev/null
 $STD apt-get update 
 $STD apt-get install -y yarn
+echo -e "${CM}${CL} \r"
 
 install_webadmin() {
     echo -en "${GN} Installing Prerequisites... "
@@ -58,19 +69,18 @@ install_webadmin() {
     echo -e "Successfully Installed!! Webmin should be reachable by going to https://${IP}:10000"
 }
 
-
-
 clear
 
 # Ask the user a yes/no question
-read -p "Do you want to run the function? (yes/no): " answer
+read -p "DDo you want to install Webmin? (yes/no): " answer
 
 # Check the answer and run the function if it's 'yes'
 if [[ "$answer" == "yes" ]]; then
     install_webadmin
 else
-    echo "Okay, the function will not be run."
+    echo "Okay,"
 fi
+
 
 
 motd_ssh
