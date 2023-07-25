@@ -33,7 +33,7 @@ catch_errors
 
 function default_settings() {
     CT_TYPE="1"
-    PW=""
+    PW="password"
     CT_ID=$NEXTID
     HN=$NSAPP
     DISK_SIZE="$var_disk"
@@ -72,33 +72,38 @@ function update_script() {
     exit
 }
 
-msg_info "Installing Dependencies"
-apt-get install -y curl &>/dev/null
-apt-get install -y sudo &>/dev/null
-apt-get install -y git &>/dev/null
-msg_ok "Installed Dependencies"
+# function advanced_settings(){
 
 
-msg_info "Setting up Node.js Repository"
-curl -sL https://deb.nodesource.com/setup_18.x curl -o nodesource_setup.sh &>/dev/null
-bash nodesource_setup.sh &>/dev/null
-msg_ok "Set up Node.js Repository"
-msg_ok node -v
+# }
 
-msg_info "Installing Node.js"
-apt-get install -y nodejs &>/dev/null
-apt-get install -y make &>/dev/null
-apt-get install -y g++ &>/dev/null
-apt-get install -y gcc &>/dev/null
-msg_ok "Installed Node.js"
+# msg_info "Installing Dependencies"
+# apt-get install -y curl &>/dev/null
+# apt-get install -y sudo &>/dev/null
+# apt-get install -y git &>/dev/null
+# msg_ok "Installed Dependencies"
 
 
-msg_info "Installing Yarn"
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - &>/dev/null
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list &>/dev/null
-apt-get update &>/dev/null
-apt-get install -y yarn &>/dev/null
-msg_ok "Installed Yarn"
+# msg_info "Setting up Node.js Repository"
+# curl -sL https://deb.nodesource.com/setup_18.x curl -o nodesource_setup.sh &>/dev/null
+# bash nodesource_setup.sh &>/dev/null
+# msg_ok "Set up Node.js Repository"
+# msg_ok node -v
+
+# msg_info "Installing Node.js"
+# apt-get install -y nodejs &>/dev/null
+# apt-get install -y make &>/dev/null
+# apt-get install -y g++ &>/dev/null
+# apt-get install -y gcc &>/dev/null
+# msg_ok "Installed Node.js"
+
+
+# msg_info "Installing Yarn"
+# curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - &>/dev/null
+# echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list &>/dev/null
+# apt-get update &>/dev/null
+# apt-get install -y yarn &>/dev/null
+# msg_ok "Installed Yarn"
 
 start
 build_container
