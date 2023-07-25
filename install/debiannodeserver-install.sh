@@ -37,11 +37,10 @@ $STD apt-get update
 $STD apt-get install -y yarn
 
 clear
-
 while true; do
-    read -p "Do you want to pull a repo?(y/n)?" yn
+    read -p "Do you want to install WebAdmin?(y/n)?" yn
     case $yn in
-    [Yy]*) break ;;
+    [Yy]*) bash -c "$(wget -qLO - https://raw.githubusercontent.com/tteck/Proxmox/main/misc/webmin.sh)" ;;
     [Nn]*) exit ;;
     *) echo "Please answer yes or no." ;;
     esac
