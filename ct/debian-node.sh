@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source <(curl -s https://raw.githubusercontent.com/tteck/Proxmox/main/misc/build.func)
+source <(curl -s https://raw.githubusercontent.com/garethcheyne/Proxmox/main/misc/build.func)
 # Copyright (c) 2021-2023 tteck
 # Author: tteck (tteckster), Gareth Cheyne (garethcheyne)
 # License: MIT
@@ -33,7 +33,7 @@ catch_errors
 
 function default_settings() {
     CT_TYPE="1"
-    PW="password"
+    PW=""
     CT_ID=$NEXTID
     HN=$NSAPP
     DISK_SIZE="$var_disk"
