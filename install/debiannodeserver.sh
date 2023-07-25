@@ -16,18 +16,19 @@ update_os
 msg_info "Installing Dependencies"
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
-$STD apt-get install -y mc
+$STD apt-get install -y git
 msg_ok "Installed Dependencies"
 
 
 msg_info "Setting up Node.js Repository"
-curl -sL https://deb.nodesource.com/setup_18.x curl -o nodesource_setup.sh 
-bash nodesource_setup.sh 
+curl -sSL https://deb.nodesource.com/setup_18.x curl -o nodesource_setup.sh
+chmod +x nodesource_setup.sh
+./nodesource_setup.sh
+update_os
 msg_ok "Set up Node.js Repository"
 msg_ok node -v
 
 msg_info "Installing Node.js"
-update_os
 $STD apt-get install -y nodejs 
 $STD apt-get install -y make 
 $STD apt-get install -y g++ 
