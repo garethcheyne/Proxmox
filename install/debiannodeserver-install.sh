@@ -38,7 +38,7 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list &>/dev/null
 $STD apt-get update 
 $STD apt-get install -y yarn
-$STD msg_ok "Installed Yarn"
+msg_ok "Installed Yarn"
 
 motd_ssh
 customize
