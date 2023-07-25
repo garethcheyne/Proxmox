@@ -49,7 +49,7 @@ function default_settings() {
     MAC=""
     VLAN=""
     SSH="yes"
-    VERB="yes"
+    VERB="no"
     echo_default
 }
 
@@ -92,11 +92,16 @@ apt-get install -y gcc &>/dev/null
 msg_ok "Installed Node.js"
 
 
+msg_info "Installing Yarn"
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - &>/dev/null
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list &>/dev/null
+apt-get update &>/dev/null
+apt-get install -y yarn &>/dev/null
+msg_ok "Installed Yarn"
+
 start
 build_container
 description
-
-
 
 msg_ok "Completed Successfully!\n"
 
