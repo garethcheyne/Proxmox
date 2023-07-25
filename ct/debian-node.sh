@@ -6,7 +6,7 @@ source <(curl -s https://raw.githubusercontent.com/tteck/Proxmox/main/misc/build
 # https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 # Install Command.
-# bash -c "$(wget -qLO - https://raw.githubusercontent.com/garethcheyne/Proxmox/raw/main/ct/debian-node.sh)"
+# bash -c "$(wget -qLO - https://github.com/garethcheyne/Proxmox/raw/main/ct/debian-node.sh)"
 
 function header_info {
 clear
@@ -52,6 +52,39 @@ function default_settings() {
     VERB="no"
     echo_default
 }
+
+function error_exit() {
+    trap - ERR
+    local reason="Unknown failure occured."
+    local msg="${1:-$reason}"
+    local flag="${RD}‼ ERROR ${CL}$EXIT@$LINE"
+    echo -e "$flag $msg" 1>&2
+    exit $EXIT
+}
+
+function update_script() {
+    header_info
+    if [[ ! -d /var ]]; then msg_error "No ${APP} Installation Found!"; exit; fi
+    msg_info "Updating ${APP} LXC"
+    apt-get update &>/dev/null
+    apt-get -y upgrade &>/dev/null
+    msg_ok "Updated ${APP} LXC"
+    exit
+}
+
+# msg_info "Installing Dependencies"
+# apt-get install -y curl &>/dev/null
+# apt-get install -y sudo &>/dev/null
+# apt-get install -y git &>/dev/null
+# msg_ok "Installed Dependencies"
+
+start
+build_container
+description
+
+
+
+msg_ok "Completed Successfully!\n"
 
 
 
