@@ -79,6 +79,10 @@ apt-get install -y git &>/dev/null
 msg_ok "Installed Dependencies"
 
 
+msg_info "Setting up Node.js Repository"
+$STD bash <(curl -fsSL https://deb.nodesource.com/setup_18.x)
+msg_ok "Set up Node.js Repository"
+
 # msg_info "Installing Dependencies"
 # apt-get install -y curl &>/dev/null
 # apt-get install -y sudo &>/dev/null
