@@ -63,20 +63,25 @@ install_webmin() {
     rm -rf /root/webmin_2.000_all.deb
     echo -e "${CM}${CL} \r"
     IP=$(hostname -I | cut -f1 -d ' ')
-    echo -e "Successfully Installed!! Webmin should be reachable by going to https://${IP}:10000"
+    echo -en "${GN} Successfully Installed!! Webmin should be reachable by going to https://${IP}:10000"
+}
+
+pull_repo(){
+    echo -en "${GN} Pulling Repo... "
+
 }
 
 while true; do
-    read -p "Do you want to install Webmin? (yes/no): " answer
+    read -p "${GN} Do you want to install Webmin? (yes/no): " answer
 
     if [[ "$answer" == "yes" ]]; then
         install_webmin
         break
     elif [[ "$answer" == "no" ]]; then
-        echo "Okay, the function will not be run."
+        echo " ${GN} Okay, the function will not be run."
         break
     else
-        echo "Please enter 'yes' or 'no'."
+        echo "${RD} Please enter 'yes' or 'no'."
     fi
 done
 
@@ -84,13 +89,13 @@ while true; do
     read -p "Do you want to pull a repo?: " answer
 
     if [[ "$answer" == "yes" ]]; then
-        echo "Okay, we will do this later."
+        echo "${GN} Okay, we will do this later."
         break
     elif [[ "$answer" == "no" ]]; then
-        echo "Okay, Sad :("
+        echo "${GN} Okay, Sad :("
         break
     else
-        echo "Please enter 'yes' or 'no'."
+        echo "${RD} Please enter 'yes' or 'no'."
     fi
 done
 
