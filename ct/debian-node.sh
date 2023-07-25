@@ -80,7 +80,7 @@ msg_ok "Installed Dependencies"
 
 
 msg_info "Setting up Node.js Repository"
-$STD bash <(curl -fsSL https://deb.nodesource.com/setup_18.x)
+curl -fOL https://deb.nodesource.com/setup_18.x | sh &>/dev/null
 msg_ok "Set up Node.js Repository"
 
 msg_info "Installing Node.js"
