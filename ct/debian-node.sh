@@ -5,6 +5,9 @@ source <(curl -s https://raw.githubusercontent.com/tteck/Proxmox/main/misc/build
 # License: MIT
 # https://github.com/tteck/Proxmox/raw/main/LICENSE
 
+# Install Command.
+# bash -c "$(wget -qLO - https://raw.githubusercontent.com/garethcheyne/Proxmox/raw/main/ct/debian-node.sh)"
+
 function header_info {
 clear
 cat <<"EOF"
@@ -63,15 +66,15 @@ function default_settings() {
 # https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 # Install Command.
-# bash -c "$(wget -qLO - https://raw.githubusercontent.com/garethcheyne/Proxmox/raw/main/install/debian-node.sh)"
+# bash -c "$(wget -qLO - https://raw.githubusercontent.com/garethcheyne/Proxmox/raw/main/ct/debian-node.sh)"
 
-source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
-color
-verb_ip6
-catch_errors
-setting_up_container
-network_check
-update_os
+# source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
+# color
+# verb_ip6
+# catch_errors
+# setting_up_container
+# network_check
+# update_os
 
 # msg_info "Installing Dependencies"
 # $STD apt-get install -y curl
