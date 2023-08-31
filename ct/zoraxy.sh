@@ -8,20 +8,20 @@ source <(curl -s https://raw.githubusercontent.com/tteck/Proxmox/main/misc/build
 function header_info {
 clear
 cat <<"EOF"
-       __     __________  _   _______
-  ____/ /__  / ____/ __ \/ | / /__  /
- / __  / _ \/ /   / / / /  |/ /  / / 
-/ /_/ /  __/ /___/ /_/ / /|  /  / /__
-\__,_/\___/\____/\____/_/ |_/  /____/
- 
+ _____
+/__  /  ____  _________ __  ____  __
+  / /  / __ \/ ___/ __ `/ |/_/ / / /
+ / /__/ /_/ / /  / /_/ />  </ /_/ /
+/____/\____/_/   \__,_/_/|_|\__, /
+                           /____/
 EOF
 }
 header_info
 echo -e "Loading..."
-APP="deCONZ"
+APP="Zoraxy"
 var_disk="4"
 var_cpu="2"
-var_ram="1024"
+var_ram="2048"
 var_os="debian"
 var_version="12"
 variables
@@ -29,7 +29,7 @@ color
 catch_errors
 
 function default_settings() {
-  CT_TYPE="0"
+  CT_TYPE="1"
   PW=""
   CT_ID=$NEXTID
   HN=$NSAPP
@@ -52,11 +52,8 @@ function default_settings() {
 
 function update_script() {
 header_info
-if [[ ! -f /etc/apt/sources.list.d/deconz.list ]]; then msg_error "No ${APP} Installation Found!"; exit; fi
-msg_info "Updating $APP LXC"
-apt-get update &>/dev/null
-apt-get -y upgrade &>/dev/null
-msg_ok "Updated $APP LXC"
+if [[ ! -d /opt/zoraxy/src ]]; then msg_error "No ${APP} Installation Found!"; exit; fi
+msg_error "There is currently no update path available."
 exit
 }
 
@@ -66,4 +63,4 @@ description
 
 msg_ok "Completed Successfully!\n"
 echo -e "${APP} should be reachable by going to the following URL.
-             ${BL}http://${IP}${CL}\n"
+         ${BL}http://${IP}:8000${CL} \n"
